@@ -10,9 +10,3 @@ type Event struct {
 	DateTime time.Time
 	UserId int
 }
-
-var events = []Event {}
-
-func GetEvents() []Event {
-	return events
-}
