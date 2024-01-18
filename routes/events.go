@@ -49,14 +49,14 @@ func createEvent(context *gin.Context) {
 
 	event.UserId = 1
 
-	insertedId, err := controller.CreateEvent(&event)
+	eventId, err := controller.CreateEvent(&event)
 
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{"message": "Could not create events. Try again later."})
 		return
 	}
 
-	context.JSON(http.StatusOK, gin.H{"id": insertedId})
+	context.JSON(http.StatusCreated, gin.H{"id": eventId})
 }
 
 func updateEvent(context *gin.Context) {
