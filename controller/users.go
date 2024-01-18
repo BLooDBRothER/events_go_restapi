@@ -29,11 +29,11 @@ func CreateUser(user *models.User) (int64, error) {
 }
 
 func ValidateUser(user *models.User) (bool, error) {
-	query := "SELECT password FROM users WHERE email=?"
+	query := "SELECT id, password FROM users WHERE email=?"
 	row := db.DB.QueryRow(query, user.Email)
 
 	var reterivedPassword string
-	err := row.Scan(&reterivedPassword)
+	err := row.Scan(&user.Id, &reterivedPassword)
 
 	if err != nil {
 		return false, err

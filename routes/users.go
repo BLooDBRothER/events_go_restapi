@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"example.com/events/controller"
+	"example.com/events/jwt"
 	"example.com/events/models"
 	"github.com/gin-gonic/gin"
 )
@@ -43,6 +44,12 @@ func login(context *gin.Context) {
 		return
 	}
 
-	context.JSON(http.StatusOK, gin.H{"message": "User logged successfully"})
+	jwtToken, err := jwt.GenerateJwtToken(user.Id, user.Email)
+
+	if(err != nil) {
+		context.JSON(http.StatusUnauthorized, gin.H{"message": "Could not authorize please try again later"})
+	}
+
+	context.JSON(http.StatusOK, gin.H{"token": jwtToken})
 }
 

@@ -1,2 +1,3 @@
 .talismanrc
 sqlite3/
+.env
